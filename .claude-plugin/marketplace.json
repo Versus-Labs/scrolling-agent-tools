@@ -1,0 +1,25 @@
+{
+  "name": "scrolling-ai",
+  "description": "Make short vertical video ads with scrolling.ai from your agent: Create, Swap and Remake.",
+  "version": "0.1.0",
+  "owner": {
+    "name": "scrolling.ai",
+    "url": "https://scrolling.ai"
+  },
+  "plugins": [
+    {
+      "name": "scrolling",
+      "source": "./plugins/scrolling",
+      "description": "Skill that teaches your agent the scrolling CLI: check the price, ask you, make the video, wait for it, download it.",
+      "category": "marketing",
+      "tags": ["video", "ads", "ugc", "creators", "cli"]
+    },
+    {
+      "name": "scrolling-mcp",
+      "source": "./plugins/scrolling-mcp",
+      "description": "Connects Claude Code to the scrolling.ai server at https://mcp.scrolling.ai/mcp. Sign in with /mcp.",
+      "category": "marketing",
+      "tags": ["video", "ads", "ugc", "creators", "mcp"]
+    }
+  ]
+}

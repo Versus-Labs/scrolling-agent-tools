@@ -1,0 +1,20 @@
+{
+  "name": "scrolling-mcp",
+  "displayName": "scrolling.ai (connector)",
+  "version": "0.1.0",
+  "description": "Connects Claude Code to the scrolling.ai server so your agent can make, check and download video ads. Sign in with /mcp.",
+  "author": {
+    "name": "scrolling.ai",
+    "url": "https://scrolling.ai"
+  },
+  "homepage": "https://scrolling.ai",
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "ads",
+    "ugc",
+    "creators",
+    "mcp"
+  ],
+  "repository": "https://github.com/Versus-Labs/scrolling-agent-tools"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "@scrolling/cli",
+  "version": "0.1.0",
+  "description": "The scrolling.ai command line: make short video ads with Creators, Swaps and Remakes from your terminal or your coding agent.",
+  "type": "module",
+  "bin": {
+    "scrolling": "dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "commander": "15.0.0"
+  },
+  "optionalDependencies": {
+    "@napi-rs/keyring": "2.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "keywords": [
+    "scrolling.ai",
+    "cli",
+    "video",
+    "ads",
+    "agents"
+  ],
+  "homepage": "https://scrolling.ai",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Versus-Labs/scrolling-agent-tools.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/Versus-Labs/scrolling-agent-tools/issues"
+  }
+}

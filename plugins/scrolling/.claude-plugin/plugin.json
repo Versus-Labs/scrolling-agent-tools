@@ -1,0 +1,20 @@
+{
+  "name": "scrolling",
+  "displayName": "scrolling.ai",
+  "version": "0.1.0",
+  "description": "Make short vertical video ads with the scrolling CLI: Create, Swap and Remake, with the price shown before anything is spent.",
+  "author": {
+    "name": "scrolling.ai",
+    "url": "https://scrolling.ai"
+  },
+  "homepage": "https://scrolling.ai",
+  "license": "MIT",
+  "keywords": [
+    "video",
+    "ads",
+    "ugc",
+    "creators",
+    "cli"
+  ],
+  "repository": "https://github.com/Versus-Labs/scrolling-agent-tools"
+}
