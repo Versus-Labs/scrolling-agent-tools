@@ -76,7 +76,7 @@ describe("confirmation gate", () => {
   test("a terminal asks; no means not started", async () => {
     const yes = fake({ env, tty: true, handler: spendServer(), answers: ["y"] });
     assert.equal(await yes.run(...CREATE), 0);
-    assert.match(yes.out.stderr, /This costs 300 credits/);
+    assert.match(yes.out.stderr, /This costs at most 300 credits/);
     const no = fake({ env, tty: true, handler: spendServer(), answers: ["n"] });
     assert.equal(await no.run(...CREATE), EXIT.confirm);
     assert.equal(posted(no, "/create").length, 0);

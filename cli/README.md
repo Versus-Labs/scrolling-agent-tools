@@ -36,6 +36,12 @@ scrolling creators list --brand brd_…               # Creators (cr_…)
 scrolling products list --brand brd_…               # products (prd_…)
 scrolling cost create --length 30 --quality 720p    # the price; nothing is spent
 
+scrolling cost creator                              # what a new Creator costs
+scrolling creators create --brand brd_… --name Mei --gender woman --energy warm,playful \
+  --description 'Runs a small bakery' --yes --wait  # designed for the brand (charged, a few minutes)
+scrolling creators create --brand brd_… --name Sam --from photo --photo ./sam.jpg --yes --wait
+scrolling creators create --brand brd_… --name Ana --from photos --photo a.jpg --photo b.jpg   # free, ready at once
+
 scrolling create --brand brd_… --creator cr_mei --length 30 \
   --idea 'Mei unboxes @Product 1 in her kitchen' --product prd_… --write-only   # free: idea + script
 scrolling create --brand brd_… --creator cr_mei --length 30 --idea '…' --script-file script.txt --yes --wait
@@ -47,13 +53,15 @@ scrolling swap approve swp_… --version 2 --quality 1080p --yes
 scrolling remake --brand brd_… --video https://www.tiktok.com/@shop/video/123 --wait   # free: writes the script
 scrolling remake film rmk_… --yes --wait
 
-scrolling jobs get job_…
+scrolling jobs get job_…                            # or swp_…, rmk_…, cr_…
 scrolling jobs wait job_… --timeout 1200
 scrolling jobs cancel job_… --yes
 scrolling videos list
 scrolling videos download vid_… -o ad.mp4
 scrolling uploads add ./clip.mp4                    # prints a file id (u1.…) you can reuse for 7 days
 ```
+
+A new Creator is made one of three ways. `--from description` (the default) designs one for the brand from your choices (`--kind`, `--gender`, `--age`, `--outfit`, up to two `--energy`, `--voice`, `--accent`) and `--description`. `--from photo` builds one from one `--photo` of a real person; how they look comes from the photo, so only `--energy`, `--voice`, `--accent` and `--description` apply. Both are charged and take a few minutes. `--from photos` uses 1 to 3 photos as they are: free and ready at once, but with no voice of its own, so it works only in Create. The job id is the new Creator's `cr_…` id: follow it with `scrolling jobs wait cr_…`, then pass it to `create --creator`. The CLI can start a Creator while fewer than 3 are being made in the account (web ones count too) and fewer than 2 by the same login or API key; otherwise it is exit 1 (`busy`), try again once one is ready. `scrolling creators create --help` lists every allowed value.
 
 Wherever a command takes a video or a picture, you can give a local path (it is uploaded for you), an https link, or a file id. Links from TikTok, Reels, Shorts, Facebook or X are passed to Swap and Remake as they are. A Swap from such a link needs `--seconds`.
 

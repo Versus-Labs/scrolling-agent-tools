@@ -8,6 +8,11 @@ import { progressLine, resumeCommand, type WaitOutput } from "../wait.js";
 const dash = (v: unknown) => (v === null || v === undefined || v === "" ? "-" : String(v));
 
 export function formatStarted(s: StartedJob & { idempotency_key?: string }): string {
+  // A Creator ready already: from photos (free), or a replay of a build that finished (its credits were held once).
+  if (s.kind === "creator" && s.status === "succeeded") {
+    const paid = s.credits_held > 0 ? `Credits held: ${s.credits_held}${s.replayed ? " (charged once; nothing charged again)" : ""}.` : "Nothing charged.";
+    return [`${s.replayed ? "Already made (same idempotency key)" : "Ready"}: ${s.job_id}. ${paid}`, `Use it: scrolling create --creator ${s.job_id} …`].join("\n");
+  }
   const lines = [
     `${s.replayed ? "Already started (same idempotency key; nothing charged again)" : "Started"}: ${s.job_id} (${s.kind})`,
     `Credits held: ${s.credits_held}. Usually takes about ${Math.max(1, Math.round(s.estimated_seconds / 60))} min.`,
@@ -19,6 +24,8 @@ export function formatStarted(s: StartedJob & { idempotency_key?: string }): str
 
 export function formatWait(d: WaitOutput & { started?: StartedJob }): string {
   const j = d.job;
+  // A finished Creator: its id and name, and how to use it.
+  if (j.kind === "creator" && j.status === "succeeded") return [`${j.id} ${j.creator?.name ?? "Creator"} ready`, `Use it: scrolling create --creator ${j.id} …`].join("\n");
   const lines = [progressLine(j)];
   if (j.error) lines.push(`Error: ${j.error}`);
   const video = j.video as { watch_url?: string | null; id?: string } | null | undefined;

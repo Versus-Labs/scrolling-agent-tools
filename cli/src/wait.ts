@@ -12,7 +12,7 @@ import type { Runtime } from "./runtime.js";
 
 export type Job = {
   id: string;
-  kind: "render" | "swap" | "remake";
+  kind: "render" | "swap" | "remake" | "creator";
   status: "queued" | "running" | "succeeded" | "failed" | "cancelled";
   progress: number;
   step: number;
@@ -21,6 +21,8 @@ export type Job = {
   error: string | null;
   stage?: string;
   video?: { watch_url: string | null } | null;
+  /** Creators (cr_…): the Creator being made, ready to use once the job succeeds. */
+  creator?: { id: string; name: string; image: string | null } | null;
   [k: string]: unknown;
 };
 export type WaitOutput = { job: Job; poll_after_seconds: number; next_step: string };

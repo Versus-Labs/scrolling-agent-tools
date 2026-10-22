@@ -1,6 +1,6 @@
 # scrolling.ai agent tools
 
-Make short video ads with [scrolling.ai](https://scrolling.ai) from your AI assistant or your terminal: Create videos with your Creators, Swap a product or person into a video, and Remake an ad for your brand.
+Make short video ads with [scrolling.ai](https://scrolling.ai) from your AI assistant or your terminal: Create videos with your Creators (or make new Creators), Swap a product or person into a video, and Remake an ad for your brand.
 
 Making videos needs a scrolling.ai paid plan and spends your credits. Without a plan, connected apps can only look (brands, Creators, products, videos). You can see and disconnect every connection in **My account → Connected apps**.
 
@@ -34,6 +34,7 @@ scrolling login            # opens scrolling.ai; --device for a code to type, --
 scrolling account
 scrolling cost create --length 15 --quality 480p
 scrolling create --brand <brand id> --idea "…" --length 15 --yes --wait
+scrolling creators create --brand <brand id> --name Mei --gender woman --age 25-34 --yes --wait
 ```
 
 Every command takes `--json`. Commands that spend credits show the price first and, without a terminal or `--yes`, stop with exit code 9 so an agent can ask you. Full reference: [cli/README.md](cli/README.md).

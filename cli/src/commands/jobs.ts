@@ -10,20 +10,21 @@ type CancelOutput = { job_id: string; status: "cancelled"; credits_refunded: num
 export function registerJobs(program: Command, ctx: Context): void {
   const jobs = program
     .command("jobs")
-    .description("follow what you started: job_… (a video being filmed), swp_… (a Swap), rmk_… (a Remake)")
+    .description("follow what you started: job_… (a video being filmed), swp_… (a Swap), rmk_… (a Remake), cr_… (a Creator being made)")
     .addHelpText(
       "after",
       `
 Examples:
   $ scrolling jobs get job_abc123
   $ scrolling jobs wait job_abc123 --timeout 1200     # exit 0 done, 7 still running, 8 failed
+  $ scrolling jobs wait cr_abc123                     # a new Creator: then use it with create --creator cr_abc123
   $ scrolling jobs cancel job_abc123 --yes`,
     );
 
   jobs
     .command("get")
     .description("where a job is now")
-    .argument("<id>", "job_…, swp_… or rmk_…")
+    .argument("<id>", "job_…, swp_…, rmk_… or cr_…")
     .action(
       act(ctx, async (rt, [id]) => {
         const api = await rt.api();
@@ -35,7 +36,7 @@ Examples:
   jobs
     .command("wait")
     .description("wait until a job finishes (progress on stderr); safe to run again")
-    .argument("<id>", "job_…, swp_… or rmk_…")
+    .argument("<id>", "job_…, swp_…, rmk_… or cr_…")
     .option("--timeout <seconds>", "stop waiting after this long (default 900; exit 7)", intArg("--timeout", 1, 86_400))
     .action(
       act(ctx, async (rt, [id], o) => {

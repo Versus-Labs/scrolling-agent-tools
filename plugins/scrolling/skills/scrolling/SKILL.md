@@ -1,6 +1,6 @@
 ---
 name: scrolling
-description: Make short vertical video ads with scrolling.ai through the `scrolling` CLI. Create (your Creators film an idea), Swap (your Creator, product or a new place goes into a video that already works) and Remake (a fresh take on a winning ad). Use when the user wants to make, check, cancel or download scrolling.ai videos, or see their credits.
+description: Make short vertical video ads with scrolling.ai through the `scrolling` CLI. Create (your Creators film an idea), Swap (your Creator, product or a new place goes into a video that already works) and Remake (a fresh take on a winning ad), and make new Creators. Use when the user wants to make, check, cancel or download scrolling.ai videos, make a Creator, or see their credits.
 ---
 
 # scrolling CLI
@@ -10,7 +10,7 @@ description: Make short vertical video ads with scrolling.ai through the `scroll
 **Always**
 - Add `--json`; read stdout.
 - Never guess ids: `account` (`brd_…`), `creators list --brand <brd>` (`cr_…`), `products list --brand <brd>` (`prd_…`).
-- Price first: `cost create --length N`, `cost swap --seconds N`, `cost swap-redo <swp>`, `cost swap-hd <swp> --version N`, `cost remake-film <rmk>`. Show the credits and balance, get a yes, then run the real command with `--yes` (or `--max-credits N` for a budget).
+- Price first: `cost create --length N`, `cost swap --seconds N`, `cost swap-redo <swp>`, `cost swap-hd <swp> --version N`, `cost remake-film <rmk>`, `cost creator`. Show the credits and balance, get a yes, then run the real command with `--yes` (or `--max-credits N` for a budget).
 - Spending commands return a `job_id` at once: follow it with `jobs wait <id>` or `--wait`. Never re-run one to check or retry: that pays for another video. To make a run safe to retry, pass your own `--idempotency-key <uuid>` and reuse it only for the identical command.
 - Local paths upload by themselves; `uploads add <file|url>` gives a reusable file id.
 
@@ -21,5 +21,7 @@ description: Make short vertical video ads with scrolling.ai through the `scroll
 **Swap**: `swap --brand <brd> --kind person|product|both|background --video <link|file>`, plus `--creator` (in order of appearance), `--product <prd>` or `--product-photo <file>`, `--scene <preset>`/`--scene-text`, `--keep-voice`, `--keep-outfit`, `--note`. A TikTok/Reels/Shorts/Facebook/X link needs `--seconds` (4–120): swapped and charged, never past the video's own length when it can be read. A direct file link must be public `https://`. The original words stay. At stage `review`, show the draft, then `swap approve <swp> --version N --quality 480p|720p|1080p` (1080p is charged) or `swap revise <swp> --note '…'` (a new paid draft; `cost swap-redo` / `swap revise` work once the first draft is ready).
 
 **Remake**: `remake --brand <brd> --video <link|file>` writes a script for free; show it, then `remake film <rmk>`.
+
+**Creators**: `creators create --brand <brd> --name <Name>`, one of three ways. Designed (default): choices `--kind`, `--gender`, `--age`, `--outfit`, `--energy` (≤2), `--voice`, `--accent` plus `--description '…'`; `--from photo --photo <file>`: one photo of a real person, only `--energy/--voice/--accent/--description`. Both charged (`cost creator`), minutes: `jobs wait <cr_…>`. `--from photos --photo <file>` (1–3): free, ready at once, no voice of its own, works only in Create. Then `create --creator <cr_…>`. Allowed values: `creators create --help`.
 
 **Finished**: `videos list`, `videos download <id> -o <path>`. `jobs cancel <job> --yes` stops a video being filmed.

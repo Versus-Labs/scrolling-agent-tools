@@ -1,6 +1,6 @@
 {
   "name": "@scrolling/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The scrolling.ai command line: make short video ads with Creators, Swaps and Remakes from your terminal or your coding agent.",
   "type": "module",
   "bin": {

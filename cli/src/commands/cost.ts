@@ -22,7 +22,8 @@ export function registerCost(program: Command, ctx: Context): void {
 Examples:
   $ scrolling cost create --length 30 --quality 720p
   $ scrolling cost swap --video https://www.tiktok.com/@shop/video/123 --seconds 20
-  $ scrolling cost swap-hd swp_abc123 --version 2`,
+  $ scrolling cost swap-hd swp_abc123 --version 2
+  $ scrolling cost creator`,
     );
 
   cost
@@ -66,4 +67,9 @@ Examples:
     .argument("<rmk_id>", "the Remake")
     .option("--quality <q>", "480p (default), 720p or 1080p", qualityArg())
     .action(act(ctx, (rt, [id], o) => show(rt, { kind: "remake_film", job_id: id, quality: o.quality })));
+
+  cost
+    .command("creator")
+    .description("a new Creator, designed or from one photo (from photos is free)")
+    .action(act(ctx, (rt) => show(rt, { kind: "creator" })));
 }
